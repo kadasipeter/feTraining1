@@ -1,84 +1,90 @@
-<html>
+<!doctype html>
+<html
+  lang="en"
+  class="notranslate"
+  translate="no"
+>
 
 <head>
-  <title>Testovacia platforma</title>
+  <meta charset="utf-8">
+  <title>BIM platforma</title>
+  <base href="/">
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Ubuntu:300,400,500,600,700&amp;display=swap"
+    rel="stylesheet"
+  >
+
+  <meta
+    name="theme-color"
+    content="#1976d2"
+  >
 </head>
 
 <body>
-  <header>
-    <h6>
-      H E A D E R L I N E
-    </h6>
-  </header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a
+      class="navbar-brand"
+      routerLink="/home-component"
+      routerLinkActive="active"
+    >Kros Test</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <nav class="topnav">
-    <div>
-      <a href="">Home</a>
-      <a href="">Wiki</a>
-      <a href="">About</a>
-    </div>
-    <div class="search-bar">
-      <form>
-        <input type="search">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a
+            class="nav-link"
+            routerLink="/home-component"
+            routerLinkActive="active"
+          >Domov <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/about-component"
+            routerLinkActive="active"
+          >About</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/example-component"
+            routerLinkActive="active"
+          >Example</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
         <input
-          type="submit"
-          value="Hľadať"
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Hľadať"
+          aria-label="Search"
         >
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          type="submit"
+        >Hľadať</button>
       </form>
     </div>
   </nav>
 
-  <main class="main-content">
-    <div class="side-bar">
-      <a href="#">Domov</a>
-      <a href="#">Projekty</a>
-      <a href="#">Nastavenia</a>
-      <a href="#">Wiki</a>
-      <a href="#">Kontakty</a>
-      <a href="#">Odkazy</a>
-      <a href="#">Galéria</a>
-      <a href="#">E-shop</a>
-      <a href="#">About</a>
-      <a href="#">Links</a>
-    </div>
-    <div class="article">
-      <h4>Vitajte v Kros platforme</h4>
-
-      <div class="flex-box">
-        <div class="box">
-          <p>1</p>
-        </div>
-        <div class="box">
-          <p>2</p>
-        </div>
-        <div class="box">
-          <p>3</p>
-        </div>
-        <div class="box">
-          <p>4</p>
-        </div>
-        <div class="box">
-          <p>5</p>
-        </div>
-        <div class="box">
-          <p>6</p>
-        </div>
-        <div class="box">
-          <p>7</p>
-        </div>
-        <div class="box">
-          <p>8</p>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <p>This is footer</p>
-  </footer>
-
+  <div class="my-layout">
+    <router-outlet></router-outlet>
+  </div>
 </body>
 
 </html>
-
-<router-outlet></router-outlet>
