@@ -14,7 +14,7 @@
 }
 
 .topnav a:hover {
-    background-color: #ddd;
+    background-color: rgb(138, 106, 106);
     color: black;
 }
 
@@ -33,15 +33,6 @@
     }
 }
 
-.my-layout {
-    position: absolute;
-    top: 57px;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: white;
-}
-
 .side-bar {
     float: left;
     width: 25%;
@@ -50,7 +41,6 @@
     padding-top: 50px;
     background-color: #111;
     border: 5px dotted rgb(42, 197, 42);
-    overflow-y: scroll;
 }
 
 .side-bar a {
@@ -69,6 +59,15 @@
     background-color: rgb(75, 72, 72);
 }
 
+.example {
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 .article {
     float: left;
     background-color: yellow;
@@ -76,7 +75,6 @@
     width: 75%;
     height: 100%;
     border: 10px solid coral;
-    overflow-y: scroll;
 }
 
 .article h4 {
