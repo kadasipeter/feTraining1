@@ -1,0 +1,18 @@
+<!--component html goes here -->
+<li class="list-group-item my-group-item">
+    <span class="inline">
+        <p class="inline">{{item.Id}}. {{item.Description}}</p>
+        <span
+            class="badge badge-pill my-badge"
+            [class.badge-primary]="item.Priority===1"
+            [class.badge-secondary]="item.Priority===2"
+            [class.badge-success]="item.Priority === 3"
+            [class.badge-danger]="item.Priority === 4"
+            [class.badge-warning]="item.Priority === 5"
+            [class.badge-info]="item.Priority === 6"
+            [class.badge-light]="item.Priority === 7"
+            [class.badge-dark]="item.Priority === 8"
+            [class.badge-danger]="item.Priority === 9"
+        >Priorita: {{item.Priority}}</span>
+    </span>
+</li>

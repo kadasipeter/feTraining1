@@ -59,22 +59,18 @@
     background-color: rgb(75, 72, 72);
 }
 
-.example {
-    overflow-y: scroll;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
-
 .article {
     float: left;
     background-color: yellow;
     opacity: 0.66;
     width: 75%;
-    height: 100%;
     border: 10px solid coral;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: scroll;
 }
 
 .article h4 {

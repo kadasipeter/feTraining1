@@ -1,0 +1,40 @@
+// component css goes here
+.form-control {
+    width: 100%;
+    margin-right: 0px;
+}
+
+.my-sidebar {
+    float: left;
+    width: 20%;
+    min-width: 250px;
+    height: 100%;
+}
+
+.sidebar-search {
+    padding: 1rem;
+}
+
+.sidebar-menu {
+    top: 100px;
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.sidebar-footer {
+    position: absolute;
+    height: 100px;
+    width: 20%;
+    bottom: 0;
+    overflow-y: scroll;
+}
+
+.sidebar-summary-badge {
+    float: left;
+    margin: 3px;
+
+    h6 {
+        margin-bottom: 0.1rem;
+        line-height: 1rem;
+    }
+}

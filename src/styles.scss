@@ -1,10 +1,5 @@
 @import 'styles/bootstrap';
 
-html,
-body {
-  box-sizing: border-box;
-}
-
 html {
   font-size: 62.5%;
 }
@@ -13,16 +8,24 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-10%, -50%);
 }
 
 .my-layout {
+  float: left;
   position: absolute;
-  top: 57px;
+  opacity: 0.7;
+  top: 59px;
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: white;
+}
+
+.main-content {
+  float: left;
+  width: 80%;
+  height: 100%;
+  opacity: 0.7;
 }
 
 .navbar-brand {

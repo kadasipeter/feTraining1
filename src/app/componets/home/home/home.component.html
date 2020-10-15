@@ -1,3 +1,46 @@
-<div class="my-centered-content">
-    <h2>Vitajte v Kros platforme</h2>
+<sidebar
+    [items]="items"
+    [summaryItems]="summaryItems"
+></sidebar>
+<div class="main-content">
+    <form
+        class="needs-validation form-group"
+        [formGroup]="homeForm"
+        (ngSubmit)="insertInvoice()"
+    >
+        <div>
+            <input
+                id="inputInvoice"
+                formControlName="inputInvoice"
+                [(ngModel)]="inputInvoiceValue"
+                type="text"
+                class="form-control"
+                [class.is-invalid]="inputInvoice.invalid && inputInvoice.touched"
+                placeholder="Zadajte číslo faktúry"
+                maxlength="20"
+                required
+            >
+
+            <div
+                *ngIf="inputInvoice.errors?.required"
+                class="invalid-feedback"
+            >
+                Prosím zadajte validné číslo faktúry.
+            </div>
+        </div>
+
+        <div class="my-button">
+            <button
+                type="button"
+                class="btn btn-primary btn-submit"
+                (click)="insertInvoice()"
+            >Zapíš</button>
+        </div>
+
+    </form>
+
+    <div class="my-centered-content">
+        <h2>Vitajte v Kros platforme</h2>
+    </div>
+
 </div>
