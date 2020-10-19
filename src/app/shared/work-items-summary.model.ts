@@ -1,5 +1,8 @@
-export class WorkItemsSummary {
+import { PriorityType } from './priority-type.enum';
+
+export class WorkItemSummary {
     Id: number;
-    TypeDescription: string;
+    Priority: PriorityType;
+    Description: string;
     Count: number;
 }

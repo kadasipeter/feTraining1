@@ -10,6 +10,7 @@ import { HomeComponent } from './componets/home/home/home.component';
 import { InvoiceItemComponent } from './componets/invoice-item/invoice-item/invoice-item.component';
 import { WorkItemService } from './shared/work-item.service';
 import { AboutComponent } from './componets/about/about/about.component';
+import { WorkItemApiService } from './shared/work-item-api.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AboutComponent } from './componets/about/about/about.component';
     AppRoutingModule
   ],
   providers: [
+    WorkItemApiService,
     WorkItemService
   ],
   bootstrap: [AppComponent]

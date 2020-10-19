@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   title = 'my-app';
 
   items: WorkItemModel[] = [];
+  index
 
   ngOnInit() {
     this.items.push(this.CreateWorkItem());
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
     var ret = new WorkItemModel;
     ret.Id = 1;
     ret.Description = this.randomString(40, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    ret.Priority = this.randomPriority();
+    ret.Value = this.randomPriority();
     return ret;
   }
 

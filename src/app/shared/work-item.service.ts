@@ -1,64 +1,82 @@
 import { Injectable } from '@angular/core';
 import { WorkItemModel } from './work-item.model';
-import { WorkItemsSummary } from './work-items-summary.model';
+import { PriorityType } from './priority-type.enum';
+import { WorkItemSummary } from './work-items-summary.model';
+import { WorkItemWithPriority } from './work-item-with-priority.model';
+import { WorkItemApiService } from './work-item-api.service';
 
 @Injectable()
 export class WorkItemService {
 
-    private workItemCounter: number = 0;
+    constructor(private workItemApiService: WorkItemApiService) { }
 
-    constructor() { }
-
-    CreateWorkItem(): WorkItemModel {
-        var ret = new WorkItemModel;
-        this.workItemCounter++;
-        ret.Id = this.workItemCounter;
-        ret.Description = this.randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        ret.Priority = this.randomPriority();
-        return ret;
-    }
-
-    Create500WorkItems(): WorkItemModel[] {
+    create500WorkItems(): WorkItemModel[] {
         var ret: WorkItemModel[] = [];
 
-        for (let i = 0; i < 500; i++) {
-            ret.push(this.CreateWorkItem());
-        }
+        this.workItemApiService.getAllItems()
+            .subscribe((items: WorkItemModel[]) => {
+                ret = items;
+            });
 
         return ret;
     }
 
-    private randomString(length: number, chars: string): string {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
+    createWorkItem(description: string): WorkItemModel {
+        let ret: WorkItemModel;
+
+        this.workItemApiService.createWorkItem(description)
+            .subscribe((item: WorkItemModel) => {
+                ret = item;
+            });
+
+        return ret;
     }
 
-    private randomPriority(): number {
-        return Math.floor(Math.random() * 9 + 1);
-    }
-
-    public GetItemsSummary(items: WorkItemModel[]): WorkItemsSummary[] {
-        var ret: WorkItemsSummary[] = [];
+    getItemsSummary(items: WorkItemModel[]): WorkItemSummary[] {
+        var ret: WorkItemSummary[] = [];
         let map = new Map<number, number>();
 
-        items.forEach(element => {
-            if (map.has(element.Priority)) {
-                map.set(element.Priority, map.get(element.Priority) + 1);
+        items.forEach(i => {
+            let priority: number = this.calculatePriority(i.Value);
+            if (map.has(priority)) {
+                map.set(priority, map.get(priority) + 1);
             }
             else {
-                map.set(element.Priority, 1);
+                map.set(priority, 1);
             }
         });
 
         map.forEach((value: number, key: number) => {
-            var summaryItem: WorkItemsSummary = new WorkItemsSummary();
+            var summaryItem: WorkItemSummary = new WorkItemSummary();
             summaryItem.Id = key;
             summaryItem.Count = value;
-            summaryItem.TypeDescription = "Pr." + key + ":  ";
+            summaryItem.Priority = key;
+            summaryItem.Description = "Priority " + PriorityType[key] + ":  ";
             ret.push(summaryItem)
         });
 
         return ret.sort((x, y) => x.Id > y.Id ? 1 : -1);
     }
+
+    calculatePriority(input: number): PriorityType {
+        return input > 5 ? PriorityType.High : PriorityType.Low;
+    }
+
+    getPriorityString(value: number): string {
+        return PriorityType[value];
+    }
+
+    filterItems(items: WorkItemModel[], filter: string): WorkItemModel[] {
+        if (filter === "") {
+            return items;
+        }
+        else {
+            return items.filter(x => this.matchesFilter(x.Description, filter));
+        }
+    }
+
+    private matchesFilter(value: string, filter: string): boolean {
+        return value.includes(filter);
+    }
 }
+

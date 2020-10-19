@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WorkItemModel } from 'src/app/shared/work-item.model';
-import { WorkItemsSummary } from 'src/app/shared/work-items-summary.model';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { WorkItemService } from 'src/app/shared/work-item.service';
+import { WorkItemSummary } from 'src/app/shared/work-items-summary.model';
+import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
 
 @Component({
     selector: 'sidebar',
@@ -12,20 +14,18 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 export class SidebarComponent implements OnInit {
 
     @Input() items: WorkItemModel[];
-    @Input() summaryItems: WorkItemsSummary[];
 
     filterForm: FormGroup;
     filteredItems: WorkItemModel[] = [];
-    filteredSummaryItems: WorkItemsSummary[];
+    actualFilter: string = "";
 
-
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private workItemsService: WorkItemService) {
     }
 
 
     ngOnInit(): void {
         this.filteredItems = this.items;
-        this.filteredSummaryItems = this.summaryItems;
+
         this.filterForm = this.formBuilder.group({
             priorityFilter: ["", []]
         });
@@ -33,17 +33,25 @@ export class SidebarComponent implements OnInit {
 
     get priorityFilter() { return this.filterForm.controls['priorityFilter']; }
 
-    filter() {
-        if (this.priorityFilter.value === "") {
-            this.filteredItems = this.items;
-            this.summaryItems = this.summaryItems;
-        }
-        else {
-
-            let filter = Array.from(this.priorityFilter.value);
-            this.filteredItems = this.items.filter(x => filter.indexOf(x.Priority.toString()) !== -1);
-            this.filteredSummaryItems = this.summaryItems.filter(x => filter.indexOf(x.Id.toString()) !== -1);
-        }
+    getSummaryItems(): WorkItemSummary[] {
+        this.filterItems();
+        return this.workItemsService.getItemsSummary(this.filteredItems);
     }
 
+    filterItems() {
+        if (this.priorityFilter.value !== this.actualFilter) {
+            this.actualFilter = this.priorityFilter.value;
+            this.filteredItems = this.workItemsService.filterItems(this.items, this.actualFilter);
+        }
+
+    }
+
+    getItemWithPriority(item: WorkItemModel): WorkItemWithPriority {
+        let ret = new WorkItemWithPriority();
+        ret.Description = item.Description;
+        ret.Id = item.Id;
+        ret.Value = item.Value;
+        ret.Priority = this.workItemsService.calculatePriority(item.Value);
+        return ret;
+    }
 }

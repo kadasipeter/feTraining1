@@ -1,5 +1,5 @@
 export class WorkItemModel {
     Id: number;
-    Priority: number;
+    Value: number;
     Description: string;
 }

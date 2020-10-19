@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WorkItemModel } from 'src/app/shared/work-item.model';
+import { WorkItemService } from 'src/app/shared/work-item.service';
+import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
 
 @Component({
     selector: 'invoice-item',
@@ -8,9 +9,15 @@ import { WorkItemModel } from 'src/app/shared/work-item.model';
 })
 export class InvoiceItemComponent implements OnInit {
 
-    @Input() item: WorkItemModel;
+    @Input() item: WorkItemWithPriority;
+
+    constructor(private workItemService: WorkItemService) { }
 
     ngOnInit(): void {
+    }
+
+    getPriorityString(item): string {
+        return item.Value + ": " + this.workItemService.getPriorityString(this.item.Priority);
     }
 
 }

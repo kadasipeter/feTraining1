@@ -5,7 +5,7 @@
         <form
             class="form-inline my-2 my-sm-0"
             [formGroup]="filterForm"
-            (ngSubmit)="filter()"
+            (keyup)="filterItems()"
         >
             <input
                 id="priorityFilter"
@@ -18,31 +18,15 @@
         </form>
     </div>
     <div class="sidebar-menu my-scrollbar">
-        <ul
-            class="list-group"
-            *ngFor="let item of filteredItems"
-        >
-            <li class="list-group-item">
-                <invoice-item [item]="item"></invoice-item>
-            </li>
+        <ul *ngFor="let item of filteredItems">
+            <invoice-item [item]="getItemWithPriority(item)"></invoice-item>
         </ul>
     </div>
     <div class="sidebar-footer">
         <h5>Sumár podľa priorít:</h5>
-        <div *ngFor="let item of filteredSummaryItems">
-            <span
-                class="badge sidebar-summary-badge"
-                [class.badge-primary]="item.Id===1"
-                [class.badge-secondary]="item.Id===2"
-                [class.badge-success]="item.Id === 3"
-                [class.badge-danger]="item.Id === 4"
-                [class.badge-warning]="item.Id === 5"
-                [class.badge-info]="item.Id === 6"
-                [class.badge-light]="item.Id === 7"
-                [class.badge-dark]="item.Id === 8"
-                [class.badge-danger]="item.Id === 9"
-            >
-                <h6> {{item.TypeDescription}}<b> {{item.Count}}</b></h6>
+        <div *ngFor="let item of getSummaryItems()">
+            <span>
+                <h6> {{item.Description}}<b> {{item.Count}}</b></h6>
             </span>
         </div>
     </div>
