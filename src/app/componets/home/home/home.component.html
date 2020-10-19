@@ -1,9 +1,12 @@
-<sidebar [items]="items"></sidebar>
+<sidebar
+    #mySidebar
+    [items]="items"
+></sidebar>
 <div class="main-content">
     <form
         class="needs-validation form-group"
         [formGroup]="homeForm"
-        (ngSubmit)="insertInvoice()"
+        (ngSubmit)="insertWorkItem()"
     >
         <div>
             <input
@@ -12,7 +15,6 @@
                 [(ngModel)]="inputInvoiceValue"
                 type="text"
                 class="form-control"
-                [class.is-invalid]="inputInvoice.invalid && inputInvoice.touched"
                 placeholder="Zadajte číslo faktúry"
                 maxlength="20"
                 required
@@ -30,7 +32,7 @@
             <button
                 type="button"
                 class="btn btn-primary btn-submit"
-                (click)="insertInvoice()"
+                (click)="insertWorkItem()"
             >Zapíš novú položku</button>
         </div>
 

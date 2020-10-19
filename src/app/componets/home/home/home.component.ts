@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { InvoiceNumberValidator } from 'src/app/validators/invoice-number-validator';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { WorkItemModel } from 'src/app/shared/work-item.model';
 import { WorkItemService } from 'src/app/shared/work-item.service';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
 
 @Component({
     selector: 'home',
@@ -15,9 +16,7 @@ export class HomeComponent implements OnInit {
     inputInvoiceValue: string;
     items: WorkItemModel[] = [];
 
-    private validator = new InvoiceNumberValidator();
-
-    @Output() workItemsCreated: EventEmitter<WorkItemModel[]> = new EventEmitter();
+    @ViewChild('mySidebar') mySidebar: SidebarComponent;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -40,10 +39,11 @@ export class HomeComponent implements OnInit {
         return this.homeForm.controls['inputInvoice'];
     }
 
-    insertInvoice() {
-        var newItem = this.workItemsService.createWorkItem(this.homeForm.controls['inputInvoice'].value);
+    insertWorkItem() {
+        var newItem = this.workItemsService.createWorkItem(this.inputInvoice.value);
         this.inputInvoiceValue = "";
         this.items.push(newItem);
+        this.mySidebar.scrollToBottom();
     }
 };
 

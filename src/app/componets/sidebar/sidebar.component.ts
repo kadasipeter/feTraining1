@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { WorkItemModel } from 'src/app/shared/work-item.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { WorkItemService } from 'src/app/shared/work-item.service';
@@ -14,6 +14,7 @@ import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.mod
 export class SidebarComponent implements OnInit {
 
     @Input() items: WorkItemModel[];
+    @ViewChild('itemsDiv') itemsDiv: ElementRef<HTMLElement>;
 
     filterForm: FormGroup;
     filteredItems: WorkItemModel[] = [];
@@ -43,7 +44,6 @@ export class SidebarComponent implements OnInit {
             this.actualFilter = this.priorityFilter.value;
             this.filteredItems = this.workItemsService.filterItems(this.items, this.actualFilter);
         }
-
     }
 
     getItemWithPriority(item: WorkItemModel): WorkItemWithPriority {
@@ -53,5 +53,12 @@ export class SidebarComponent implements OnInit {
         ret.Value = item.Value;
         ret.Priority = this.workItemsService.calculatePriority(item.Value);
         return ret;
+    }
+
+
+    scrollToBottom(): void {
+        try {
+            this.itemsDiv.nativeElement.scrollTop = this.itemsDiv.nativeElement.scrollHeight;
+        } catch (err) { }
     }
 }
