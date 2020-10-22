@@ -40,9 +40,10 @@ export class HomeComponent implements OnInit {
     }
 
     insertWorkItem() {
-        var newItem = this.workItemsService.createWorkItem(this.inputInvoice.value);
+        let newItem: WorkItemModel = this.workItemsService.createWorkItem(this.inputInvoice.value);
         this.inputInvoiceValue = "";
-        this.items.push(newItem);
+        this.items = [newItem, ...this.items];
+        //  this.items.push(newItem);
         this.mySidebar.scrollToBottom();
     }
 };

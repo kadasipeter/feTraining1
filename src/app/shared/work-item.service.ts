@@ -11,7 +11,7 @@ export class WorkItemService {
     constructor(private workItemApiService: WorkItemApiService) { }
 
     create500WorkItems(): WorkItemModel[] {
-        var ret: WorkItemModel[] = [];
+        let ret: WorkItemModel[] = [];
 
         this.workItemApiService.getAllItems()
             .subscribe((items: WorkItemModel[]) => {
@@ -33,11 +33,11 @@ export class WorkItemService {
     }
 
     getItemsSummary(items: WorkItemModel[]): WorkItemSummary[] {
-        var ret: WorkItemSummary[] = [];
-        let map = new Map<number, number>();
+        let ret: WorkItemSummary[] = [];
+        let map: Map<number, number> = new Map<number, number>();
 
         items.forEach(i => {
-            let priority: number = this.calculatePriority(i.Value);
+            let priority: number = this.calculatePriority(i.value);
             if (map.has(priority)) {
                 map.set(priority, map.get(priority) + 1);
             }
@@ -47,15 +47,16 @@ export class WorkItemService {
         });
 
         map.forEach((value: number, key: number) => {
-            var summaryItem: WorkItemSummary = new WorkItemSummary();
-            summaryItem.Id = key;
-            summaryItem.Count = value;
-            summaryItem.Priority = key;
-            summaryItem.Description = "Priority " + PriorityType[key] + ":  ";
-            ret.push(summaryItem)
+            let summaryItem: WorkItemSummary = {
+                id: key,
+                count: value,
+                priority: key,
+                description: "Priority " + PriorityType[key] + ":  "
+            }
+            ret = [summaryItem, ...ret];
         });
 
-        return ret.sort((x, y) => x.Id > y.Id ? 1 : -1);
+        return ret;
     }
 
     calculatePriority(input: number): PriorityType {
@@ -71,7 +72,7 @@ export class WorkItemService {
             return items;
         }
         else {
-            return items.filter(x => this.matchesFilter(x.Description, filter));
+            return items.filter(x => this.matchesFilter(x.description, filter));
         }
     }
 

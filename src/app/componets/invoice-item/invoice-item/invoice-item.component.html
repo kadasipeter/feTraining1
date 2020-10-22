@@ -1,11 +1,11 @@
 <!--component html goes here -->
 <li class="list-group-item my-group-item">
     <span class="inline">
-        <p class="inline">{{item.Id}}. {{item.Description}}</p>
+        <p class="inline">{{item.id}}. {{item.description}}</p>
         <span
             class="badge badge-pill my-badge"
-            [class.badge-dark]="item.Priority === 1"
-            [class.badge-danger]="item.Priority === 2"
+            [class.badge-dark]="item.priority === 1"
+            [class.badge-danger]="item.priority === 2"
         >{{getPriorityString(item)}}</span>
     </span>
 </li>

@@ -47,18 +47,20 @@ export class SidebarComponent implements OnInit {
     }
 
     getItemWithPriority(item: WorkItemModel): WorkItemWithPriority {
-        let ret = new WorkItemWithPriority();
-        ret.Description = item.Description;
-        ret.Id = item.Id;
-        ret.Value = item.Value;
-        ret.Priority = this.workItemsService.calculatePriority(item.Value);
+        let ret: WorkItemWithPriority = {
+            description: item.description,
+            id: item.id,
+            value: item.value,
+            priority: this.workItemsService.calculatePriority(item.value)
+        }
+
         return ret;
     }
 
 
     scrollToBottom(): void {
         try {
-            this.itemsDiv.nativeElement.scrollTop = this.itemsDiv.nativeElement.scrollHeight;
+            // this.itemsDiv.nativeElement.scrollTop = this.itemsDiv.nativeElement.scrollHeight;
         } catch (err) { }
     }
 }

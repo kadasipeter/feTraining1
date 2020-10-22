@@ -21,15 +21,18 @@
         #itemsDiv
         class="sidebar-menu my-scrollbar"
     >
-        <ul *ngFor="let item of filteredItems">
-            <invoice-item [item]="getItemWithPriority(item)"></invoice-item>
+        <ul class="zero-inline-padding">
+            <invoice-item
+                *ngFor="let item of filteredItems"
+                [item]="getItemWithPriority(item)"
+            ></invoice-item>
         </ul>
     </div>
     <div class="sidebar-footer">
         <h5>Sumár podľa priorít:</h5>
         <div *ngFor="let item of getSummaryItems()">
             <span>
-                <h6> {{item.Description}}<b> {{item.Count}}</b></h6>
+                <h6> {{item.description}}<b> {{item.count}}</b></h6>
             </span>
         </div>
     </div>

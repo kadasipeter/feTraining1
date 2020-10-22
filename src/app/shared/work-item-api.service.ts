@@ -5,39 +5,36 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class WorkItemApiService {
 
-    private workItemCounter: number = 0;
+    private workItemCounter: number = 1;
 
     getAllItems(): Observable<WorkItemModel[]> {
-        var ret: WorkItemModel[] = [];
+        let ret: WorkItemModel[] = [];
 
         for (let i = 0; i < 500; i++) {
-            ret.push(this.generateWorkItem(""));
+            let newItem = this.generateWorkItem("");
+            ret = [newItem, ...ret];
         }
 
         return of(ret);
     }
 
     createWorkItem(description: string): Observable<WorkItemModel> {
-        var ret = this.generateWorkItem(description);
-        return of(ret);
+        return of(this.generateWorkItem(description));
     }
 
     private generateWorkItem(description: string): WorkItemModel {
-        var ret = new WorkItemModel;
-        this.workItemCounter++;
-        ret.Id = this.workItemCounter;
-        if (description === "") {
-            ret.Description = this.randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        } else {
-            ret.Description = description;
-        }
-        ret.Value = this.randomPriority();
+        let ret: WorkItemModel = {
+            id: this.workItemCounter++,
+            description: description === "" ? this.randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') : description,
+            value: this.randomPriority()
+        };
+
         return ret;
     }
 
     private randomString(length: number, chars: string): string {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        let result = '';
+        for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
         return result;
     }
 

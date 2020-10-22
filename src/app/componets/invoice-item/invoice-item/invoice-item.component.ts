@@ -16,8 +16,8 @@ export class InvoiceItemComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    getPriorityString(item): string {
-        return item.Value + ": " + this.workItemService.getPriorityString(this.item.Priority);
+    getPriorityString(item: WorkItemWithPriority): string {
+        return item.value + ": " + this.workItemService.getPriorityString(item.priority);
     }
 
 }

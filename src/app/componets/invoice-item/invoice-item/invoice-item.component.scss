@@ -1,7 +1,8 @@
 // component css goes here
 .inline {
-    display: inline;
     border: none;
+    display: inline;
+    padding-inline-start: 0;
 }
 
 .list-group-item {
