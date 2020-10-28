@@ -59,7 +59,19 @@ export class WorkItemService {
         return ret;
     }
 
-    calculatePriority(input: number): PriorityType {
+    getItemWithPriority(item: WorkItemModel): WorkItemWithPriority {
+        let ret: WorkItemWithPriority = {
+            description: item.description,
+            id: item.id,
+            value: item.value,
+            priority: this.calculatePriority(item.value)
+        }
+
+        return ret;
+    }
+
+
+    private calculatePriority(input: number): PriorityType {
         return input > 5 ? PriorityType.High : PriorityType.Low;
     }
 
@@ -67,7 +79,7 @@ export class WorkItemService {
         return PriorityType[value];
     }
 
-    filterItems(items: WorkItemModel[], filter: string): WorkItemModel[] {
+    filterItems(items: WorkItemWithPriority[], filter: string): WorkItemWithPriority[] {
         if (filter === "") {
             return items;
         }

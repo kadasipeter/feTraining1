@@ -1,0 +1,8 @@
+<div class="sidebar-footer">
+    <h5>Sumár podľa priorít:</h5>
+    <div *ngFor="let item of summaryItems">
+        <span>
+            <h6> {{item.description}}<b> {{item.count}}</b></h6>
+        </span>
+    </div>
+</div>

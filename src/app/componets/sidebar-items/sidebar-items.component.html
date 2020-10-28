@@ -1,0 +1,10 @@
+<div
+    #itemsDiv
+    class="sidebar-menu my-scrollbar"
+>
+    <ul class="zero-inline-padding">
+        <div *ngFor="let item of filteredItems">
+            <invoice-item [item]="item"></invoice-item>
+        </div>
+    </ul>
+</div>

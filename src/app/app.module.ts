@@ -11,6 +11,9 @@ import { InvoiceItemComponent } from './componets/invoice-item/invoice-item/invo
 import { WorkItemService } from './shared/work-item.service';
 import { AboutComponent } from './componets/about/about/about.component';
 import { WorkItemApiService } from './shared/work-item-api.service';
+import { SidebarFilterComponent } from './componets/sidebar-filter/sidebar-filter.component';
+import { SidebarItemsComponent } from './componets/sidebar-items/sidebar-items.component';
+import { SidebarFooterComponent } from './componets/sidebar-footer/sidebar-footer.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { WorkItemApiService } from './shared/work-item-api.service';
     AboutComponent,
     MyNavbarComponent,
     SidebarComponent,
+    SidebarFilterComponent,
+    SidebarItemsComponent,
+    SidebarFooterComponent,
     HomeComponent,
   ],
   imports: [

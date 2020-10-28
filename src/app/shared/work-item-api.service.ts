@@ -10,7 +10,7 @@ export class WorkItemApiService {
     getAllItems(): Observable<WorkItemModel[]> {
         let ret: WorkItemModel[] = [];
 
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 5000; i++) {
             let newItem = this.generateWorkItem("");
             ret = [newItem, ...ret];
         }
@@ -41,6 +41,4 @@ export class WorkItemApiService {
     private randomPriority(): number {
         return Math.floor(Math.random() * 10 + 1);
     }
-
-
 }

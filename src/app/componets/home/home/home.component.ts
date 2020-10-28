@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { WorkItemModel } from 'src/app/shared/work-item.model';
 import { WorkItemService } from 'src/app/shared/work-item.service';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
+import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
 
 @Component({
     selector: 'home',
@@ -12,11 +13,12 @@ import { SidebarComponent } from '../../sidebar/sidebar.component';
 })
 
 export class HomeComponent implements OnInit {
+    @ViewChild('mySidebar') mySidebar: SidebarComponent;
+
     homeForm: FormGroup;
     inputInvoiceValue: string;
-    items: WorkItemModel[] = [];
+    items: WorkItemWithPriority[] = [];
 
-    @ViewChild('mySidebar') mySidebar: SidebarComponent;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.workItemsService.create500WorkItems().forEach(element => {
-            this.items.push(element);
+            this.items.push(this.workItemsService.getItemWithPriority(element));
         });
 
         this.homeForm = this.formBuilder.group({
@@ -40,11 +42,11 @@ export class HomeComponent implements OnInit {
     }
 
     insertWorkItem() {
-        let newItem: WorkItemModel = this.workItemsService.createWorkItem(this.inputInvoice.value);
+        let newItem: WorkItemWithPriority = this.workItemsService.getItemWithPriority(
+            this.workItemsService.createWorkItem(this.inputInvoice.value));
         this.inputInvoiceValue = "";
         this.items = [newItem, ...this.items];
         //  this.items.push(newItem);
-        this.mySidebar.scrollToBottom();
     }
 };
 

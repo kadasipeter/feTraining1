@@ -1,39 +1,6 @@
 <!--component html goes here -->
 <div class="my-sidebar">
-
-    <div class="sidebar-search">
-        <form
-            class="form-inline my-2 my-sm-0"
-            [formGroup]="filterForm"
-            (keyup)="filterItems()"
-        >
-            <input
-                id="priorityFilter"
-                class="form-control mr-xl-2"
-                type="search"
-                formControlName="priorityFilter"
-                placeholder="Filtruj podľa priorít"
-                aria-label="Search"
-            >
-        </form>
-    </div>
-    <div
-        #itemsDiv
-        class="sidebar-menu my-scrollbar"
-    >
-        <ul class="zero-inline-padding">
-            <invoice-item
-                *ngFor="let item of filteredItems"
-                [item]="getItemWithPriority(item)"
-            ></invoice-item>
-        </ul>
-    </div>
-    <div class="sidebar-footer">
-        <h5>Sumár podľa priorít:</h5>
-        <div *ngFor="let item of getSummaryItems()">
-            <span>
-                <h6> {{item.description}}<b> {{item.count}}</b></h6>
-            </span>
-        </div>
-    </div>
+    <sidebar-filter (filterItems)="onFilterItems($event)"> </sidebar-filter>
+    <sidebar-items [filteredItems]="filteredItems"> </sidebar-items>
+    <sidebar-footer [summaryItems]="summaryItems"> </sidebar-footer>
 </div>
