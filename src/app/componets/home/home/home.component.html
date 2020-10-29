@@ -1,6 +1,8 @@
 <sidebar
     #mySidebar
-    [items]="items"
+    [filteredItems]="filteredItems"
+    [summaryItems]="summaryItems"
+    (filterItems)="onFilterItems($event)"
 ></sidebar>
 <div class="main-content">
     <form
@@ -9,16 +11,29 @@
         (ngSubmit)="insertWorkItem()"
     >
         <div>
-            <input
-                id="inputInvoice"
-                formControlName="inputInvoice"
-                [(ngModel)]="inputInvoiceValue"
-                type="text"
-                class="form-control"
-                placeholder="Zadajte číslo faktúry"
-                maxlength="20"
-                required
-            >
+            <div>
+                <input
+                    id="inputInvoice"
+                    formControlName="inputInvoice"
+                    [(ngModel)]="inputInvoiceValue"
+                    type="text"
+                    class="form-control my-input-60"
+                    placeholder="Zadajte číslo faktúry"
+                    maxlength="20"
+                    required
+                >
+
+                <input
+                    id="inputDate"
+                    formControlName="inputDate"
+                    [(ngModel)]="inputDateValue"
+                    min="2018-01-01"
+                    max="2099-12-31"
+                    type="date"
+                    class="form-control my-input-40"
+                    required
+                >
+            </div>
 
             <div
                 *ngIf="inputInvoice.errors?.required"

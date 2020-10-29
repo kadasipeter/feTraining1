@@ -11,6 +11,7 @@ export class SidebarFilterComponent implements OnInit {
     @Output() filterItems: EventEmitter<string> = new EventEmitter();
 
     filterForm: FormGroup;
+    actualFilter: string = "";
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -22,7 +23,10 @@ export class SidebarFilterComponent implements OnInit {
     }
 
     onKeyUp() {
-        this.filterItems.emit(this.priorityFilter.value)
+        if (this.actualFilter !== this.priorityFilter.value) {
+            this.actualFilter = this.priorityFilter.value;
+            this.filterItems.emit(this.actualFilter)
+        }
     };
 
     get priorityFilter() { return this.filterForm.controls['priorityFilter']; }

@@ -5,5 +5,6 @@ export class WorkItemWithPriority implements WorkItemModel {
     id: number;
     value: number;
     description: string;
+    timestamp: Date;
     priority: PriorityType;
 }

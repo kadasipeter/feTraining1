@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { WorkItemModel } from 'src/app/shared/work-item.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { WorkItemService } from 'src/app/shared/work-item.service';
 import { WorkItemSummary } from 'src/app/shared/work-items-summary.model';
 import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
@@ -11,32 +9,14 @@ import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.mod
     styleUrls: ['sidebar.component.scss']
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
-    @Input() items: WorkItemWithPriority[];
-    @ViewChild('itemsDiv') itemsDiv: ElementRef<HTMLElement>;
+    @Input() filteredItems: WorkItemWithPriority[] = [];
+    @Input() summaryItems: WorkItemSummary[] = [];
 
-    filteredItems: WorkItemWithPriority[] = [];
-    summaryItems: WorkItemSummary[] = [];
-    actualFilter: string = "";
+    @Output() filterItems: EventEmitter<string> = new EventEmitter();
 
-    constructor(private workItemsService: WorkItemService) {
-    }
-
-    ngOnInit(): void {
-        this.filteredItems = this.items;
-        this.loadSummaryItems();
-    }
-
-    loadSummaryItems() {
-        this.summaryItems = this.workItemsService.getItemsSummary(this.filteredItems);
-    }
-
-    onFilterItems(filter: string) {
-        if (filter !== this.actualFilter) {
-            this.actualFilter = filter;
-            this.filteredItems = this.workItemsService.filterItems(this.items, this.actualFilter);
-        }
-        this.loadSummaryItems();
+    onFilterItems(value: string) {
+        this.filterItems.emit(value);
     }
 }

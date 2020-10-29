@@ -1,10 +1,10 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
-import { InvoiceNumberValidator } from 'src/app/validators/invoice-number-validator';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
-import { WorkItemModel } from 'src/app/shared/work-item.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+
 import { WorkItemService } from 'src/app/shared/work-item.service';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
+import { WorkItemSummary } from 'src/app/shared/work-items-summary.model';
 
 @Component({
     selector: 'home',
@@ -17,12 +17,16 @@ export class HomeComponent implements OnInit {
 
     homeForm: FormGroup;
     inputInvoiceValue: string;
-    items: WorkItemWithPriority[] = [];
+    inputDateValue: string;
+    actualFilter: string = '';
+    filteredItems: WorkItemWithPriority[] = [];
+    summaryItems: WorkItemSummary[] = [];
 
+    private items: WorkItemWithPriority[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
-        private workItemsService: WorkItemService
+        private workItemsService: WorkItemService,
     ) {
 
     }
@@ -33,20 +37,40 @@ export class HomeComponent implements OnInit {
         });
 
         this.homeForm = this.formBuilder.group({
-            inputInvoice: ['', []]
+            inputInvoice: ['', []],
+            inputDate: ['', []]
         });
+
+        this.filteredItems = this.items;
+        this.loadSummaryItems();
+
+        this.inputDateValue = new Date().toISOString().split('T')[0];
     }
 
     get inputInvoice(): AbstractControl {
         return this.homeForm.controls['inputInvoice'];
     }
 
+    get inputDate(): AbstractControl {
+        return this.homeForm.controls['inputDate'];
+    }
+
     insertWorkItem() {
         let newItem: WorkItemWithPriority = this.workItemsService.getItemWithPriority(
-            this.workItemsService.createWorkItem(this.inputInvoice.value));
+            this.workItemsService.createWorkItem(this.inputInvoice.value, this.inputDate.value));
         this.inputInvoiceValue = "";
         this.items = [newItem, ...this.items];
-        //  this.items.push(newItem);
+        this.onFilterItems(this.actualFilter);
+    }
+
+    onFilterItems(value: string) {
+        this.filteredItems = this.workItemsService.filterItems(this.items, value);
+        this.loadSummaryItems();
+        this.actualFilter = value;
+    }
+
+    private loadSummaryItems() {
+        this.summaryItems = this.workItemsService.getItemsSummary(this.filteredItems);
     }
 };
 

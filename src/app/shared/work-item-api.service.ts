@@ -26,7 +26,8 @@ export class WorkItemApiService {
         let ret: WorkItemModel = {
             id: this.workItemCounter++,
             description: description === "" ? this.randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') : description,
-            value: this.randomPriority()
+            value: this.randomPriority(),
+            timestamp: new Date()
         };
 
         return ret;

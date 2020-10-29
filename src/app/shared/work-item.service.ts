@@ -21,11 +21,12 @@ export class WorkItemService {
         return ret;
     }
 
-    createWorkItem(description: string): WorkItemModel {
+    createWorkItem(description: string, timestamp: Date): WorkItemModel {
         let ret: WorkItemModel;
 
         this.workItemApiService.createWorkItem(description)
             .subscribe((item: WorkItemModel) => {
+                item.timestamp = timestamp;
                 ret = item;
             });
 
@@ -64,6 +65,7 @@ export class WorkItemService {
             description: item.description,
             id: item.id,
             value: item.value,
+            timestamp: item.timestamp,
             priority: this.calculatePriority(item.value)
         }
 
