@@ -1,14 +1,10 @@
 <div class="sidebar-search">
-    <form
-        class="form-inline my-2 my-sm-0"
-        [formGroup]="filterForm"
-        (keyup)="onKeyUp()"
-    >
+    <form class="form-inline my-2 my-sm-0 my-filter-form">
         <input
             id="priorityFilter"
             class="form-control mr-xl-2"
+            [formControl]="priorityFilter"
             type="search"
-            formControlName="priorityFilter"
             placeholder="Filtruj podľa priorít"
             aria-label="Search"
         >

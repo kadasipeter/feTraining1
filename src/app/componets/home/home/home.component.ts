@@ -16,8 +16,6 @@ export class HomeComponent implements OnInit {
     @ViewChild('mySidebar') mySidebar: SidebarComponent;
 
     homeForm: FormGroup;
-    inputInvoiceValue: string;
-    inputDateValue: string;
     actualFilter: string = '';
     filteredItems: WorkItemWithPriority[] = [];
     summaryItems: WorkItemSummary[] = [];
@@ -44,7 +42,7 @@ export class HomeComponent implements OnInit {
         this.filteredItems = this.items;
         this.loadSummaryItems();
 
-        this.inputDateValue = new Date().toISOString().split('T')[0];
+        this.inputDate.setValue(new Date().toISOString().split('T')[0]);
     }
 
     get inputInvoice(): AbstractControl {
@@ -58,7 +56,7 @@ export class HomeComponent implements OnInit {
     insertWorkItem() {
         let newItem: WorkItemWithPriority = this.workItemsService.getItemWithPriority(
             this.workItemsService.createWorkItem(this.inputInvoice.value, this.inputDate.value));
-        this.inputInvoiceValue = "";
+        this.inputInvoice.setValue("");
         this.items = [newItem, ...this.items];
         this.onFilterItems(this.actualFilter);
     }

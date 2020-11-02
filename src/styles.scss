@@ -4,17 +4,25 @@ html {
   font-size: 62.5%;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.my-navbar {
+  padding-top: 5px;
+}
+
 .my-centered-content {
   position: absolute;
   top: 50%;
-  left: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .my-layout {
-  float: left;
   position: absolute;
-  opacity: 0.7;
   top: 59px;
   bottom: 0;
   right: 0;
@@ -22,49 +30,75 @@ html {
 }
 
 .main-content {
-  float: left;
-  width: 80%;
-  height: 100%;
-  opacity: 0.7;
-}
-
-.navbar-brand {
-  width: 15rem;
-  padding-left: 1.5rem;
-  font-weight: bold;
-}
-
-.form-control {
   width: 100%;
-  margin-right: 0px;
+  height: 100%;
+  padding-left: 272px;
+}
+
+.main-content-div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 271px;
 }
 
 .my-sidebar {
   float: left;
-  width: 20%;
-  min-width: 250px;
+  width: 270px;
   height: 100%;
+  overflow-y: auto;
 }
 
 .sidebar-search {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
   padding: 1rem;
+  background-color: white;
 }
 
 .sidebar-menu {
-  top: 100px;
-  height: 70%;
-  overflow-y: scroll;
+  height: 100%;
+  z-index: -1;
 }
 
 .sidebar-footer {
-  position: absolute;
-  height: 100px;
-  width: 20%;
+  position: sticky;
+  height: 120px;
+  width: 100%;
   bottom: 0;
   padding-left: 1rem;
-  overflow-y: scroll;
+  padding-top: 1rem;
+  z-index: 1;
+  background-color: white;
 }
 
 .zero-inline-padding {
   padding-inline-start: 0;
+}
+
+.list-group-item {
+  padding-left: 1rem;
+}
+
+.navbar-brand {
+  width: 15rem;
+  font-weight: bold;
+  padding-left: 0;
+}
+
+.my-filter-form {
+  width: 100%;
+  margin-right: 0px;
+}
+
+.my-input-100 {
+  width: 100%;
+}
+
+.my-input-40 {
+  padding-top: 2rem;
+  width: 40%;
 }

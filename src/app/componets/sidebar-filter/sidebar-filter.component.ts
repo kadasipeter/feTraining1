@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'sidebar-filter',
@@ -10,24 +11,20 @@ export class SidebarFilterComponent implements OnInit {
 
     @Output() filterItems: EventEmitter<string> = new EventEmitter();
 
-    filterForm: FormGroup;
     actualFilter: string = "";
+    priorityFilter = new FormControl();
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor() {
     }
 
     ngOnInit(): void {
-        this.filterForm = this.formBuilder.group({
-            priorityFilter: ["", []]
-        });
+        this.priorityFilter.valueChanges
+            .pipe(
+                filter(p => this.actualFilter !== p)
+            )
+            .subscribe(value => {
+                this.actualFilter = value;
+                this.filterItems.emit(value);
+            })
     }
-
-    onKeyUp() {
-        if (this.actualFilter !== this.priorityFilter.value) {
-            this.actualFilter = this.priorityFilter.value;
-            this.filterItems.emit(this.actualFilter)
-        }
-    };
-
-    get priorityFilter() { return this.filterForm.controls['priorityFilter']; }
 }
