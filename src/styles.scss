@@ -14,13 +14,6 @@ body {
   padding-top: 5px;
 }
 
-.my-centered-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .my-layout {
   position: absolute;
   top: 59px;
@@ -29,18 +22,9 @@ body {
   left: 0;
 }
 
-.main-content {
-  width: 100%;
+.my-content {
   height: 100%;
-  padding-left: 272px;
-}
-
-.main-content-div {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 271px;
+  overflow: auto;
 }
 
 .my-sidebar {
@@ -56,7 +40,10 @@ body {
   z-index: 1;
   width: 100%;
   padding: 1rem;
+  padding-bottom: 0;
   background-color: white;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 1rem;
 }
 
 .sidebar-menu {
@@ -66,13 +53,13 @@ body {
 
 .sidebar-footer {
   position: sticky;
-  height: 120px;
   width: 100%;
   bottom: 0;
-  padding-left: 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
   z-index: 1;
   background-color: white;
+  margin-top: 1rem;
+  border-top: 1px solid #d9d9d9;
 }
 
 .zero-inline-padding {
@@ -89,16 +76,21 @@ body {
   padding-left: 0;
 }
 
-.my-filter-form {
-  width: 100%;
-  margin-right: 0px;
+.centered {
+  text-align: center;
+}
+.middle {
+  align-items: center;
+  height: 100%;
 }
 
-.my-input-100 {
+.my-input {
   width: 100%;
+  padding: 2rem;
+  padding-top: 0;
 }
 
-.my-input-40 {
-  padding-top: 2rem;
-  width: 40%;
+.my-detail {
+  width: 400px;
+  padding: 5rem;
 }

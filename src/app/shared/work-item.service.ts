@@ -4,36 +4,37 @@ import { PriorityType } from './priority-type.enum';
 import { WorkItemSummary } from './work-items-summary.model';
 import { WorkItemWithPriority } from './work-item-with-priority.model';
 import { WorkItemApiService } from './work-item-api.service';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class WorkItemService {
 
-    constructor(private workItemApiService: WorkItemApiService) { }
 
-    create500WorkItems(): WorkItemModel[] {
+    private items: WorkItemWithPriority[] = [];
+    private actualFilter: string = "";
+
+    constructor(private workItemApiService: WorkItemApiService) {
+        this.create5000WorkItems();
+    }
+
+    private create5000WorkItems() {
         let ret: WorkItemModel[] = [];
 
         this.workItemApiService.getAllItems()
-            .subscribe((items: WorkItemModel[]) => {
-                ret = items;
-            });
-
-        return ret;
+            .subscribe((i: WorkItemModel[]) => i.forEach(e => this.items.push(this.getItemWithPriority(e))));
     }
 
-    createWorkItem(description: string, timestamp: Date): WorkItemModel {
+    createWorkItem(description: string, timestamp: Date) {
         let ret: WorkItemModel;
 
         this.workItemApiService.createWorkItem(description)
             .subscribe((item: WorkItemModel) => {
                 item.timestamp = timestamp;
-                ret = item;
+                this.items = [this.getItemWithPriority(item), ...this.items];
             });
-
-        return ret;
     }
 
-    getItemsSummary(items: WorkItemModel[]): WorkItemSummary[] {
+    getItemsSummary(items: WorkItemWithPriority[]): Observable<WorkItemSummary[]> {
         let ret: WorkItemSummary[] = [];
         let map: Map<number, number> = new Map<number, number>();
 
@@ -57,10 +58,20 @@ export class WorkItemService {
             ret = [summaryItem, ...ret];
         });
 
-        return ret;
+        return of(ret);
     }
 
-    getItemWithPriority(item: WorkItemModel): WorkItemWithPriority {
+    getAllItems(): Observable<WorkItemWithPriority[]> {
+        return this.actualFilter === ""
+            ? of(this.items)
+            : of(this.items.filter(x => this.matchesFilter(x.description)));
+    }
+
+    getWorkItem(id: number): Observable<WorkItemWithPriority> {
+        return of(this.items.filter(item => item.id === id)[0]);
+    }
+
+    private getItemWithPriority(item: WorkItemModel): WorkItemWithPriority {
         let ret: WorkItemWithPriority = {
             description: item.description,
             id: item.id,
@@ -72,26 +83,16 @@ export class WorkItemService {
         return ret;
     }
 
-
     private calculatePriority(input: number): PriorityType {
         return input > 5 ? PriorityType.High : PriorityType.Low;
     }
 
-    getPriorityString(value: number): string {
-        return PriorityType[value];
+    setFilter(filter: string) {
+        this.actualFilter = filter;
     }
 
-    filterItems(items: WorkItemWithPriority[], filter: string): WorkItemWithPriority[] {
-        if (filter === "") {
-            return items;
-        }
-        else {
-            return items.filter(x => this.matchesFilter(x.description, filter));
-        }
-    }
-
-    private matchesFilter(value: string, filter: string): boolean {
-        return value.includes(filter);
+    private matchesFilter(value: string): boolean {
+        return value.includes(this.actualFilter);
     }
 }
 

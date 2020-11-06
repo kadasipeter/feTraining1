@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { WorkItemService } from 'src/app/shared/work-item.service';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
 
 @Component({
     selector: 'invoice-item',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'invoice-item.component.html',
     styleUrls: ['invoice-item.component.scss']
 })
@@ -11,13 +11,6 @@ export class InvoiceItemComponent implements OnInit {
 
     @Input() item: WorkItemWithPriority;
 
-    constructor(private workItemService: WorkItemService) { }
-
     ngOnInit(): void {
     }
-
-    getPriorityString(item: WorkItemWithPriority): string {
-        return item.value + ": " + this.workItemService.getPriorityString(item.priority);
-    }
-
 }

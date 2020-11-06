@@ -1,11 +1,16 @@
 <!--component html goes here -->
-<li class="list-group-item">
-    <span class="inline">
-        <p class="inline">{{item.id}}. {{item.description}}</p>
-        <span
-            class="badge badge-pill my-badge"
-            [class.badge-dark]="item.priority === 1"
-            [class.badge-danger]="item.priority === 2"
-        >{{getPriorityString(item)}}</span>
-    </span>
-</li>
+<a
+    routerLink="/detail/{{item.id}}"
+    class="list-group-item list-group-item-action"
+>
+    <li>
+        <span class="inline">
+            <p class="inline">{{item.id}}. {{item.description}}</p>
+            <span
+                class="badge badge-pill my-badge"
+                [class.badge-dark]="item.priority === 1"
+                [class.badge-danger]="item.priority === 2"
+            >{{item | getPriority}}</span>
+        </span>
+    </li>
+</a>

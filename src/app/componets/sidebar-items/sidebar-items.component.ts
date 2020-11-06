@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { WorkItemModel } from 'src/app/shared/work-item.model';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
 
 @Component({
     selector: 'sidebar-items',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'sidebar-items.component.html',
     styleUrls: ['sidebar-items.component.scss']
 })

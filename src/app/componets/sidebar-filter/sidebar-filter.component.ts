@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'sidebar-filter',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'sidebar-filter.component.html',
     styleUrls: ['sidebar-filter.component.scss']
 })
