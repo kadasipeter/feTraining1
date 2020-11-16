@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './componets/home/home/home.component';
-import { ExampleComponent } from './componets/example/example/example.component';
-import { NotFoundComponent } from './componets/not-found/not-found/not-found.component';
-import { DetailComponent } from './componets/detail/detail/detail.component';
-import { MasterComponent } from './componets/master/master.component';
+import { WorkItemsComponent } from './componets/work-items/work-items.component';
+import { WorkItemDetailComponent } from './componets/work-items/work-item-detail/work-item-detail.component';
+import { WorkItemCreateComponent as WorkItemCreate } from './componets/work-items/work-item-create/work-item-create.component';
+import { ExampleComponent } from './componets/example/example.component';
+import { NotFoundComponent } from './componets/not-found/not-found.component';
+import { WorkItemDashboardComponent } from './componets/work-items/work-item-dashboard/work-item-dashboard.component';
 
 const routes: Routes = [
   {
-    path: '', component: MasterComponent,
+    path: 'items', component: WorkItemsComponent,
     children: [
       {
-        path: 'detail/:id',
-        component: DetailComponent,
+        path: 'dashboard',
+        component: WorkItemDashboardComponent,
       },
       {
-        path: 'home',
-        component: HomeComponent,
+        path: 'detail/:id',
+        component: WorkItemDetailComponent,
+      },
+      {
+        path: 'create',
+        component: WorkItemCreate,
       }]
   },
   { path: 'example', component: ExampleComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'items/dashboard', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 
 ];

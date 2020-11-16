@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkItemModel } from './shared/work-item.model';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +11,5 @@ export class AppComponent implements OnInit {
   }
 
   title = 'work-items-app';
-
 }
 

@@ -1,17 +1,15 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 
 import { WorkItemService } from 'src/app/shared/work-item.service';
 
 @Component({
-    selector: 'home',
-    templateUrl: 'home.component.html',
-    styleUrls: ['home.component.scss']
+    selector: 'work-item-create',
+    templateUrl: 'work-item-create.component.html',
+    styleUrls: ['work-item-create.component.scss']
 })
 
-export class HomeComponent implements OnInit {
-
-    @Output() refresh: EventEmitter<void> = new EventEmitter();
+export class WorkItemCreateComponent implements OnInit {
 
     homeForm: FormGroup;
 
@@ -41,7 +39,6 @@ export class HomeComponent implements OnInit {
     insertWorkItem() {
         this.workItemsService.createWorkItem(this.inputInvoice.value, this.inputDate.value);
         this.inputInvoice.setValue("");
-        this.refresh.emit();
     }
 };
 

@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
 import { ActivatedRoute } from '@angular/router';
 import { WorkItemService } from 'src/app/shared/work-item.service';
+import { WorkItemModel } from 'src/app/shared/work-item.model';
 
 @Component({
-    selector: 'detail',
-    templateUrl: 'detail.component.html',
-    styleUrls: ['detail.component.scss']
+    selector: 'work-item-detail',
+    templateUrl: 'work-item-detail.component.html',
+    styleUrls: ['work-item-detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class WorkItemDetailComponent implements OnInit {
 
-    @Input() item: WorkItemWithPriority;
+    @Input() item: WorkItemModel;
 
     constructor(private route: ActivatedRoute, private itemService: WorkItemService) {
         this.route.paramMap.subscribe(params => {
@@ -20,7 +20,7 @@ export class DetailComponent implements OnInit {
 
     ngOnInit(): void {
         let id: number = parseInt(this.route.snapshot.paramMap.get("id"));
-        this.itemService.getWorkItem(id).subscribe(item => this.item = item);
+        this.item = this.itemService.getWorkItem(id);
     }
 
 }

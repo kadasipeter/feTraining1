@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
+import { WorkItemModel } from 'src/app/shared/work-item.model';
 
 @Component({
     selector: 'sidebar-items',
@@ -8,5 +8,5 @@ import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.mod
     styleUrls: ['sidebar-items.component.scss']
 })
 export class SidebarItemsComponent {
-    @Input() filteredItems: WorkItemWithPriority[];
+    @Input() items: WorkItemModel[];
 }

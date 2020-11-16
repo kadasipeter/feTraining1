@@ -3,32 +3,37 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MyNavbarComponent } from './componets/my-navbar/my-navbar/my-navbar.component';
 import { SidebarComponent } from './componets/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './componets/home/home/home.component';
-import { InvoiceItemComponent } from './componets/invoice-item/invoice-item/invoice-item.component';
 import { WorkItemService } from './shared/work-item.service';
 import { WorkItemApiService } from './shared/work-item-api.service';
-import { SidebarFilterComponent } from './componets/sidebar-filter/sidebar-filter.component';
-import { SidebarItemsComponent } from './componets/sidebar-items/sidebar-items.component';
-import { SidebarFooterComponent } from './componets/sidebar-footer/sidebar-footer.component';
 import { GetPriorityPipe } from './shared/get-priority.pipe';
-import { DetailComponent } from './componets/detail/detail/detail.component';
-import { MasterComponent } from './componets/master/master.component';
+import { WorkItemsComponent } from './componets/work-items/work-items.component';
+import { GetSummaryItemsPipe } from './shared/get-summary-items.pipe';
+import { SidebarItemsComponent } from './componets/sidebar/sidebar-items/sidebar-items.component';
+import { SidebarFilterComponent } from './componets/sidebar/sidebar-filter/sidebar-filter.component';
+import { WorkItemDetailComponent } from './componets/work-items/work-item-detail/work-item-detail.component';
+import { WorkItemCreateComponent } from './componets/work-items/work-item-create/work-item-create.component';
+import { SidebarFooterComponent } from './componets/sidebar/sidebar-footer/sidebar-footer.component';
+import { MyNavbarComponent } from './componets/my-navbar/my-navbar.component';
+import { WorkItemComponent } from './componets/sidebar/sidebar-items/work-item/work-item.component';
+import { WorkItemDashboardComponent } from './componets/work-items/work-item-dashboard/work-item-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GetPriorityPipe,
-    InvoiceItemComponent,
-    DetailComponent,
+    GetSummaryItemsPipe,
+    WorkItemComponent,
+    WorkItemDetailComponent,
     MyNavbarComponent,
     SidebarComponent,
     SidebarFilterComponent,
     SidebarItemsComponent,
     SidebarFooterComponent,
-    HomeComponent, MasterComponent],
+    WorkItemCreateComponent,
+    WorkItemDashboardComponent,
+    WorkItemsComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -36,7 +41,8 @@ import { MasterComponent } from './componets/master/master.component';
     AppRoutingModule,
   ],
   exports: [
-    GetPriorityPipe
+    GetPriorityPipe,
+    GetSummaryItemsPipe
   ],
   providers: [
     WorkItemApiService,

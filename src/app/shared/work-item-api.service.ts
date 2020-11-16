@@ -7,10 +7,10 @@ export class WorkItemApiService {
 
     private workItemCounter: number = 1;
 
-    getAllItems(): Observable<WorkItemModel[]> {
+    getAllItems(count: number = 5000): Observable<WorkItemModel[]> {
         let ret: WorkItemModel[] = [];
 
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < count; i++) {
             let newItem = this.generateWorkItem("");
             ret = [newItem, ...ret];
         }
@@ -18,8 +18,10 @@ export class WorkItemApiService {
         return of(ret);
     }
 
-    createWorkItem(description: string): Observable<WorkItemModel> {
-        return of(this.generateWorkItem(description));
+    createWorkItem(description: string, timestamp: Date): Observable<WorkItemModel> {
+        let workItem = this.generateWorkItem(description);
+        workItem.timestamp = timestamp;
+        return of(workItem);
     }
 
     private generateWorkItem(description: string): WorkItemModel {

@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { WorkItemService } from 'src/app/shared/work-item.service';
-import { WorkItemSummary } from 'src/app/shared/work-items-summary.model';
-import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.model';
+import { WorkItemModel } from 'src/app/shared/work-item.model';
 
 @Component({
     selector: 'sidebar',
@@ -11,24 +10,30 @@ import { WorkItemWithPriority } from 'src/app/shared/work-item-with-priority.mod
 
 export class SidebarComponent implements OnInit {
 
-    @Input() filteredItems: WorkItemWithPriority[] = [];
-    @Input() summaryItems: WorkItemSummary[] = [];
+    items: WorkItemModel[];
+    private allItems: WorkItemModel[];
+    private actualFilter: string = "";
 
     constructor(
         private workItemsService: WorkItemService,
     ) { }
 
     ngOnInit() {
-        this.refreshData();
+        this.workItemsService.items$.subscribe(_ => {
+            this.allItems = _;
+            this.onFilterItems(this.actualFilter);
+        })
     }
 
     onFilterItems(value: string) {
-        this.workItemsService.setFilter(value);
-        this.refreshData();
-    }
+        this.actualFilter = value;
 
-    refreshData() {
-        this.workItemsService.getAllItems().subscribe(items => this.filteredItems = items)
-        this.workItemsService.getItemsSummary(this.filteredItems).subscribe(items => this.summaryItems = items);
+        if (value === "") {
+            this.items = this.allItems;
+        }
+        else {
+            this.items = this.allItems.filter(_ => _.description.includes(value));
+        }
+
     }
 }
