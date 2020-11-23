@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WorkItemModel } from './work-item.model';
-import { WorkItemApiService } from './work-item-api.service';
+import { ItemHelperService } from './item-helper.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -12,22 +12,19 @@ export class WorkItemService {
     private itemsSubject: BehaviorSubject<WorkItemModel[]>;
     private items: WorkItemModel[] = [];
 
-    constructor(private workItemApiService: WorkItemApiService) {
+    constructor(private workItemApiService: ItemHelperService) {
         this.createItems();
         this.itemsSubject = new BehaviorSubject(this.items);
         this.items$ = this.itemsSubject.asObservable();
     }
 
-    private createItems() {
-        this.workItemApiService.getAllItems().subscribe(_ => this.items = _);
+    private createItems(): void {
+        this.items = this.workItemApiService.getAllItems();
     }
 
-    createWorkItem(description: string, timestamp: Date) {
-        this.workItemApiService.createWorkItem(description, timestamp)
-            .subscribe((item: WorkItemModel) => {
-                this.items = [item, ...this.items];
-                this.itemsSubject.next(this.items);
-            });
+    createWorkItem(description: string, timestamp: Date): void {
+      this.items = [this.workItemApiService.createWorkItem(description, timestamp), ...this.items];
+      this.itemsSubject.next(this.items);
     }
 
     getWorkItem(id: number): WorkItemModel {

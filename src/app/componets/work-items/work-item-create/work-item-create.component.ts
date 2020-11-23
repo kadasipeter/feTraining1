@@ -1,10 +1,11 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 
 import { WorkItemService } from 'src/app/shared/work-item.service';
 
 @Component({
-    selector: 'work-item-create',
+    selector: 'app-work-item-create',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'work-item-create.component.html',
     styleUrls: ['work-item-create.component.scss']
 })
@@ -18,7 +19,7 @@ export class WorkItemCreateComponent implements OnInit {
         private workItemsService: WorkItemService,
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.homeForm = this.formBuilder.group({
             inputInvoice: ['', []],
@@ -29,16 +30,16 @@ export class WorkItemCreateComponent implements OnInit {
     }
 
     get inputInvoice(): AbstractControl {
-        return this.homeForm.controls['inputInvoice'];
+        return this.homeForm.controls.inputInvoice;
     }
 
     get inputDate(): AbstractControl {
-        return this.homeForm.controls['inputDate'];
+        return this.homeForm.controls.inputDate;
     }
 
-    insertWorkItem() {
+    insertWorkItem(): void{
         this.workItemsService.createWorkItem(this.inputInvoice.value, this.inputDate.value);
-        this.inputInvoice.setValue("");
+        this.inputInvoice.setValue('');
     }
-};
+}
 

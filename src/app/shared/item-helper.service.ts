@@ -3,41 +3,41 @@ import { WorkItemModel } from './work-item.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable()
-export class WorkItemApiService {
+export class ItemHelperService {
 
-    private workItemCounter: number = 1;
+    private workItemCounter = 1;
 
-    getAllItems(count: number = 5000): Observable<WorkItemModel[]> {
+    getAllItems(count: number = 5000): WorkItemModel[] {
         let ret: WorkItemModel[] = [];
 
         for (let i = 0; i < count; i++) {
-            let newItem = this.generateWorkItem("");
+            const newItem = this.generateWorkItem('');
             ret = [newItem, ...ret];
         }
-
-        return of(ret);
-    }
-
-    createWorkItem(description: string, timestamp: Date): Observable<WorkItemModel> {
-        let workItem = this.generateWorkItem(description);
-        workItem.timestamp = timestamp;
-        return of(workItem);
-    }
-
-    private generateWorkItem(description: string): WorkItemModel {
-        let ret: WorkItemModel = {
-            id: this.workItemCounter++,
-            description: description === "" ? this.randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') : description,
-            value: this.randomPriority(),
-            timestamp: new Date()
-        };
 
         return ret;
     }
 
+    createWorkItem(description: string, timestamp: Date): WorkItemModel {
+        const workItem = this.generateWorkItem(description);
+        workItem.timestamp = timestamp;
+        return workItem;
+    }
+
+    private generateWorkItem(description: string): WorkItemModel {
+        return {
+            id: this.workItemCounter++,
+            description: description === ''
+              ? this.randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+              : description,
+            value: this.randomPriority(),
+            timestamp: new Date()
+        };
+    }
+
     private randomString(length: number, chars: string): string {
         let result = '';
-        for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        for (let i = length; i > 0; --i) { result += chars[Math.floor(Math.random() * chars.length)]; }
         return result;
     }
 

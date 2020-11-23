@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './componets/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WorkItemService } from './shared/work-item.service';
-import { WorkItemApiService } from './shared/work-item-api.service';
+import { ItemHelperService } from './shared/item-helper.service';
 import { GetPriorityPipe } from './shared/get-priority.pipe';
 import { WorkItemsComponent } from './componets/work-items/work-items.component';
 import { GetSummaryItemsPipe } from './shared/get-summary-items.pipe';
@@ -45,7 +45,7 @@ import { WorkItemDashboardComponent } from './componets/work-items/work-item-das
     GetSummaryItemsPipe
   ],
   providers: [
-    WorkItemApiService,
+    ItemHelperService,
     WorkItemService,
   ],
   bootstrap: [AppComponent]
