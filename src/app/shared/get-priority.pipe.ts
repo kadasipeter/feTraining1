@@ -4,6 +4,6 @@ import { PriorityType } from './priority-type.enum';
 @Pipe({ name: 'getPriority' })
 export class GetPriorityPipe implements PipeTransform {
     transform(value: number): string {
-        return value + ": " + PriorityType[value < 5 ? 1 : 2];
+        return value + ': ' + PriorityType[value < 5 ? 1 : 2];
     }
 }

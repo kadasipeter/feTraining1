@@ -8,10 +8,10 @@ export class GetSummaryItemsPipe implements PipeTransform {
 
     transform(items: WorkItemModel[], ...args: any[]): WorkItemSummary[] {
         let ret: WorkItemSummary[] = [];
-        let map: Map<number, number> = new Map<number, number>();
+        const map: Map<number, number> = new Map<number, number>();
 
         items.forEach(i => {
-            let priority: number = this.calculatePriority(i.value);
+            const priority: number = this.calculatePriority(i.value);
             if (map.has(priority)) {
                 map.set(priority, map.get(priority) + 1);
             }
@@ -21,12 +21,13 @@ export class GetSummaryItemsPipe implements PipeTransform {
         });
 
         map.forEach((value: number, key: number) => {
-            let summaryItem: WorkItemSummary = {
+            const summaryItem: WorkItemSummary = {
                 id: key,
                 count: value,
                 priority: key,
-                description: "Priority " + PriorityType[key] + ":  "
-            }
+                description: 'Priority ' + PriorityType[key] + ':  '
+            };
+
             ret = [summaryItem, ...ret];
         });
 

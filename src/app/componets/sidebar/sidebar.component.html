@@ -1,6 +1,6 @@
 <!--component html goes here -->
 <div>
-    <sidebar-filter (filterItems)="onFilterItems($event)"> </sidebar-filter>
-    <sidebar-items [items]="items"> </sidebar-items>
-    <sidebar-footer [summaryItems]="items | getSummaryItems"> </sidebar-footer>
+    <app-sidebar-filter (filterItems)="onFilterItems($event)"> </app-sidebar-filter>
+    <app-sidebar-items [items]="items"> </app-sidebar-items>
+    <app-sidebar-footer [summaryItems]="items | getSummaryItems"> </app-sidebar-footer>
 </div>

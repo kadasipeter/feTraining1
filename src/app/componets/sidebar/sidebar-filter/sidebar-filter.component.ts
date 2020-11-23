@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 
 @Component({
-    selector: 'sidebar-filter',
+    selector: 'app-sidebar-filter',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'sidebar-filter.component.html',
     styleUrls: ['sidebar-filter.component.scss']
@@ -12,7 +12,7 @@ export class SidebarFilterComponent implements OnInit {
 
     @Output() filterItems: EventEmitter<string> = new EventEmitter();
 
-    actualFilter: string = "";
+    actualFilter = '';
     priorityFilter = new FormControl();
 
     constructor() {
@@ -26,6 +26,6 @@ export class SidebarFilterComponent implements OnInit {
             .subscribe(value => {
                 this.actualFilter = value;
                 this.filterItems.emit(value);
-            })
+            });
     }
 }

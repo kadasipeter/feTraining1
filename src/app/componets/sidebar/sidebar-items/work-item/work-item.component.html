@@ -9,7 +9,7 @@
             <span
                 class="badge badge-pill my-badge"
                 [class.badge-dark]='item.value < 5'
-                [class.badge-danger]="item.value >= 5"
+                [class.badge-danger]='item.value >= 5'
             >{{item.value | getPriority}}</span>
         </span>
     </li>
