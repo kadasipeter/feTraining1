@@ -7,24 +7,13 @@ export class ItemHelperService {
 
     private workItemCounter = 1;
 
-    getAllItems(count: number = 5000): WorkItemModel[] {
-        let ret: WorkItemModel[] = [];
-
-        for (let i = 0; i < count; i++) {
-            const newItem = this.generateWorkItem('');
-            ret = [newItem, ...ret];
-        }
-
-        return ret;
-    }
-
     createWorkItem(description: string, timestamp: Date): WorkItemModel {
         const workItem = this.generateWorkItem(description);
         workItem.timestamp = timestamp;
         return workItem;
     }
 
-    private generateWorkItem(description: string): WorkItemModel {
+    generateWorkItem(description: string): WorkItemModel {
         return {
             id: this.workItemCounter++,
             description: description === ''

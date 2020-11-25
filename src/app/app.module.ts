@@ -18,6 +18,8 @@ import { SidebarFooterComponent } from './componets/sidebar/sidebar-footer/sideb
 import { MyNavbarComponent } from './componets/my-navbar/my-navbar.component';
 import { WorkItemComponent } from './componets/sidebar/sidebar-items/work-item/work-item.component';
 import { WorkItemDashboardComponent } from './componets/work-items/work-item-dashboard/work-item-dashboard.component';
+import { StoreModule } from '@ngrx/store';
+import { addWorkItemsReducer } from './redux/work-items.reducer';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { WorkItemDashboardComponent } from './componets/work-items/work-item-das
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    StoreModule.forRoot({items: addWorkItemsReducer})
   ],
   exports: [
     GetPriorityPipe,
