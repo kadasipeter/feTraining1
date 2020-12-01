@@ -1,12 +1,13 @@
 import { PipeTransform, Pipe } from '@angular/core';
-import { WorkItemModel } from './work-item.model';
-import { WorkItemSummary } from './work-items-summary.model';
-import { PriorityType } from './priority-type.enum';
+
+import { PriorityType } from '../core/priority-type.enum';
+import { WorkItem } from '../core/work-item.model';
+import { WorkItemSummary } from '../core/work-items-summary.model';
 
 @Pipe({ name: 'getSummaryItems' })
 export class GetSummaryItemsPipe implements PipeTransform {
 
-    transform(items: WorkItemModel[], ...args: any[]): WorkItemSummary[] {
+    transform(items: WorkItem[], ...args: any[]): WorkItemSummary[] {
         let ret: WorkItemSummary[] = [];
         const map: Map<number, number> = new Map<number, number>();
 

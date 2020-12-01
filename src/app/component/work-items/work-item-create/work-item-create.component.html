@@ -1,0 +1,63 @@
+<form
+  class="needs-validation form-group"
+  [formGroup]="itemCreateForm"
+  (ngSubmit)="insertWorkItem()"
+>
+  <div class="my-input">
+
+    <input
+      id="inputInvoice"
+      formControlName="inputInvoice"
+      type="text"
+      class="form-control"
+      placeholder="Zadajte text"
+      [class.is-invalid]="inputInvoice.invalid && inputInvoice.touched"
+    >
+
+    <div
+      *ngIf="inputInvoice.invalid && (inputInvoice.dirty || inputInvoice.touched)"
+      class=" alert alert-danger"
+    >
+
+      <div
+        *ngIf="inputInvoice.errors?.required"
+        class="text-danger"
+      >
+        <small>Pole nesmie byť prázdne.</small>
+      </div>
+
+      <div
+        *ngIf="inputInvoice.errors?.maxlength"
+        class="text-danger"
+      >
+        <small>Maximálna dĺžka je 10 znakov.</small>
+      </div>
+
+      <div
+        *ngIf="inputInvoice.errors?.pattern"
+        class="text-danger"
+      >
+        <small>Povolené znaky sú iba písmená.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-input">
+    <input
+      id="inputDate"
+      formControlName="inputDate"
+      min="2018-01-01"
+      max="2099-12-31"
+      type="date"
+      class="form-control"
+      required
+    >
+  </div>
+  <div class="container centered">
+    <button
+      type="button"
+      class="btn btn-primary btn-submit"
+      (click)="insertWorkItem()"
+    >Zapíš novú položku</button>
+  </div>
+</form>

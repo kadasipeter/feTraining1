@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PriorityType } from './priority-type.enum';
+import { PriorityType } from '../core/priority-type.enum';
 
 @Pipe({ name: 'getPriority' })
 export class GetPriorityPipe implements PipeTransform {
