@@ -34,7 +34,7 @@ export class WorkItemService {
       return foundItem;
     }
 
-    private createItems(count: number = 5000): void {
+    private createItems(count: number = 500): void {
       for (let i = 0; i < count; i++) {
           const newItem = this.helperService.generateWorkItem('');
           this.store.dispatch(WorkItemActions.CreateWorkItemAction(newItem));
