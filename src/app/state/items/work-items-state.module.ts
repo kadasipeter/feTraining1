@@ -8,8 +8,8 @@ import { WorkItemSelectorsService } from './work-items-selectors.service';
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({items: addWorkItemsReducer})
+    StoreModule.forFeature('items', {items: addWorkItemsReducer})
   ],
   providers: [WorkItemSelectorsService]
 })
-export class StateModule { }
+export class WorkItemsStateModule { }

@@ -3,21 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ComponentModule } from './component/component.module';
-import { CoreModule } from './core/core.module';
-import { StateModule } from './state/state.module';
+import { AppStateModule } from './state/app-state.module';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent],
   imports: [
+    RouterModule,
     AppRoutingModule,
     BrowserModule,
-    CoreModule,
-    ComponentModule,
-    StateModule
+    SharedModule,
+    AppStateModule
   ],
-  exports: [
+  exports: [AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

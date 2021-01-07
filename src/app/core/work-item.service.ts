@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app-state';
 import { ItemHelperService } from './item-helper.service';
 import { WorkItem } from './work-item.model';
-import * as WorkItemActions from '../state/work-items.action';
-import { WorkItemSelectorsService } from '../state/work-items-selectors.service';
+import * as WorkItemActions from '../state/items/work-items.action';
+import { WorkItemSelectorsService } from '../state/items/work-items-selectors.service';
 
 @Injectable({
     providedIn: 'root'

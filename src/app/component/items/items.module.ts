@@ -12,6 +12,7 @@ import { SidebarFooterComponent } from './sidebar/sidebar-footer/sidebar-footer.
 import { WorkItemCreateComponent } from './work-items/work-item-create/work-item-create.component';
 import { WorkItemDashboardComponent } from './work-items/work-item-dashboard/work-item-dashboard.component';
 import { WorkItemsComponent } from './work-items/work-items.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 const COMPONENTS = [
   WorkItemComponent,
@@ -31,7 +32,8 @@ const COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     ItemsRoutingModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ],
   exports: [...COMPONENTS]
 })

@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { AppState, initializeState } from './app-state';
-import { WorkItem } from '../core/work-item.model';
+import { AppState, initializeState } from '../app-state';
+import { WorkItem } from '../../core/work-item.model';
 
 import * as WorkItemActions from './work-items.action';
 

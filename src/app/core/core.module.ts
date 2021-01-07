@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StateModule } from '../state/state.module';
+import { WorkItemsStateModule } from '../state/items/work-items-state.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StateModule
+    WorkItemsStateModule
   ]
 })
 export class CoreModule { }

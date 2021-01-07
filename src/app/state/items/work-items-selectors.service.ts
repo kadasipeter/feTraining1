@@ -1,17 +1,22 @@
-import { createSelector, Store } from '@ngrx/store';
+import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AppState } from './app-state';
-import { WorkItem as WorkItem } from '../core/work-item.model';
+import { AppState } from '../app-state';
+import { WorkItem as WorkItem } from '../../core/work-item.model';
 
-export const selectItems = (state: {items: AppState}) => state.items.items;
+const selectWorkItemsFeature = createFeatureSelector<{items: AppState}>('items');
+
+const selectProjectDetail = createSelector(
+    selectWorkItemsFeature,
+    state => state.items.items
+);
 
 export const selectItemById = createSelector(
-  selectItems,
+  selectProjectDetail,
   (items: WorkItem[], id: number) => items.find(p => p.id === id));
 
-export const selectAll = createSelector(selectItems, _ => _);
+export const selectAll = createSelector(selectProjectDetail, _ => _);
 
 @Injectable({
   providedIn: 'root'

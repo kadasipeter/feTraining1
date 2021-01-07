@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { WorkItem } from './work-item.model';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
