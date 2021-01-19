@@ -1,0 +1,16 @@
+<!--component html goes here -->
+<a
+  routerLink="{{item.id}}"
+  class="list-group-item list-group-item-action"
+>
+  <li>
+    <span class="inline">
+      <p class="inline">{{item.id}}. {{item.description}}</p>
+      <span
+        class="badge badge-pill my-badge"
+        [class.badge-dark]='item.value < 5'
+        [class.badge-danger]='item.value >= 5'
+      >{{item.value | getPriority}}</span>
+    </span>
+  </li>
+</a>
