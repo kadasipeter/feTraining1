@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-
     { path: '', redirectTo: 'main', pathMatch: 'full' },
     { path: 'main', component: MainComponent},
     {
@@ -18,7 +17,6 @@ const routes: Routes = [
       path: '**',
       loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule)
     }
-
 ];
 
 @NgModule({

@@ -23,6 +23,6 @@ export class WorkItemDashboardComponent implements OnInit {
 
     goToDetail(): void {
         const idValue: number = this.id.value !== null ? this.id.value : 1;
-        this.route.navigateByUrl('items/detail/' + idValue.toString());
+        this.route.navigateByUrl('items/' + idValue.toString());
     }
 }

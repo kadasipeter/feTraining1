@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { WorkItemCreateComponent } from './create/work-item-create.component';
 import { WorkItemDashboardComponent } from './dashboard/work-item-dashboard.component';
 import { WorkItemDetailComponent } from './detail/work-item-detail.component';
@@ -14,12 +15,12 @@ const routes: Routes = [
         component: WorkItemDashboardComponent,
       },
       {
-        path: ':id',
-        component: WorkItemDetailComponent,
-      },
-      {
         path: 'create',
         component: WorkItemCreateComponent,
+      },
+      {
+        path: ':id',
+        component: WorkItemDetailComponent,
       }]
   }
 ];
