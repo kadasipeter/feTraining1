@@ -30,12 +30,12 @@ const COMPONENTS = [
   declarations: [...COMPONENTS],
   imports: [
     CommonModule,
+    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     ItemsRoutingModule,
-    SharedModule,
-    CoreModule
+    SharedModule
   ],
-  exports: [...COMPONENTS]
+  exports: []
 })
 export class ItemsModule { }

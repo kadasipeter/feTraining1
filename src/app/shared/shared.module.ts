@@ -10,7 +10,6 @@ const COMPONENTS = [GetPriorityPipe, GetSummaryItemsPipe, MyNavbarComponent];
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
-    CommonModule,
     RouterModule
   ],
   exports: [...COMPONENTS]

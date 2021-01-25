@@ -10,9 +10,16 @@ describe('WorkItemDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkItemDashboardComponent ],
-      imports: [ReactiveFormsModule, FormsModule],
-      providers: [{provide: Router, useValue: {}}]
+      declarations: [
+        WorkItemDashboardComponent
+      ],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule
+      ],
+      providers: [
+        {provide: Router, useValue: {}}
+      ]
     })
     .compileComponents();
   });

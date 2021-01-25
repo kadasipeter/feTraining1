@@ -1,8 +1,8 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { WorkItemComponent } from '../sidebar-items/work-item/work-item.component';
 import { SidebarFilterComponent } from './sidebar-filter.component';
+import { WorkItemComponent } from '../sidebar-items/work-item/work-item.component';
 
 describe('SidebarFilterComponent', () => {
   let component: SidebarFilterComponent;
@@ -10,8 +10,14 @@ describe('SidebarFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidebarFilterComponent, WorkItemComponent ],
-      imports: [ReactiveFormsModule, FormsModule]
+      declarations: [
+        SidebarFilterComponent,
+        WorkItemComponent
+      ],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule
+      ]
     })
     .compileComponents();
   });
@@ -26,9 +32,8 @@ describe('SidebarFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
- it('should emit filter text after typing into filter input', fakeAsync(() => {
-    // spy on event emitter
-    const component = fixture.componentInstance;
+  it('should emit filter text after typing into filter input', fakeAsync(() => {
+    component = fixture.componentInstance;
     const nativeElement: HTMLElement = fixture.nativeElement;
     const input = nativeElement.querySelector('input');
 

@@ -5,12 +5,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { of } from 'rxjs';
 
-import { WorkItemService } from '../core/work-item.service';
 import { SharedModule } from '../shared/shared.module';
 import { SidebarFilterComponent } from './sidebar/sidebar-filter/sidebar-filter.component';
 import { SidebarFooterComponent } from './sidebar/sidebar-footer/sidebar-footer.component';
 import { SidebarItemsComponent } from './sidebar/sidebar-items/sidebar-items.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { WorkItemService } from '../core/work-item.service';
 import { WorkItemsComponent } from './work-items.component';
 
 describe('WorkItemComponent', () => {

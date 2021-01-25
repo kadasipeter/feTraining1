@@ -4,16 +4,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { of } from 'rxjs';
 
-import { WorkItem } from 'src/app/core/work-item.model';
-import { WorkItemService } from 'src/app/core/work-item.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SidebarComponent } from './sidebar.component';
 import { SidebarFilterComponent } from './sidebar-filter/sidebar-filter.component';
 import { SidebarFooterComponent } from './sidebar-footer/sidebar-footer.component';
 import { SidebarItemsComponent } from './sidebar-items/sidebar-items.component';
+import { WorkItem } from 'src/app/core/work-item.model';
 import { WorkItemComponent } from './sidebar-items/work-item/work-item.component';
-import { SidebarComponent } from './sidebar.component';
+import { WorkItemService } from 'src/app/core/work-item.service';
 
-const fakeItems: WorkItem[] =[
+const fakeItems: WorkItem[] = [
   {
     id: 1,
     value: 7,
@@ -55,7 +55,7 @@ describe('SidebarComponent', () => {
         SharedModule
       ],
       providers: [
-        { provide: WorkItemService, useValue: workItemServiceMock},
+        { provide: WorkItemService, useValue: workItemServiceMock }
       ]
     })
     .compileComponents();
@@ -75,5 +75,5 @@ describe('SidebarComponent', () => {
     expect(component.items.length).toBe(3);
     component.onFilterItems('a');
     expect(component.items.length).toBe(2);
-  })
+  });
 });

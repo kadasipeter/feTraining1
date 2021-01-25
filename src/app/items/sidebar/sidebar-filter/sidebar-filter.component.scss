@@ -1,1 +1,3 @@
-// component css goes here
+@import './../../../../styles/bootstrap';
+
+@include full-page-component();

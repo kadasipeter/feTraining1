@@ -1,10 +1,10 @@
-import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
 import { AppStateModule } from './state/app-state.module';
+import { SharedModule } from './shared/shared.module';
 
 describe('AppComponent', () => {
   const routerMock = {

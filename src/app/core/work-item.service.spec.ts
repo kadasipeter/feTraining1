@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { of } from 'rxjs';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { StoreModule } from '@ngrx/store';
 
 import { ItemHelperService } from './item-helper.service';
 import { WorkItem } from './work-item.model';
-import { WorkItemService } from "./work-item.service";
+import { WorkItemService } from './work-item.service';
 import { WorkItemSelectorsService } from '../state/items/work-items-selectors.service';
 
-const fakeItems: WorkItem[] =[
+const fakeItems: WorkItem[] = [
   {
     id: 1,
     value: 7,
@@ -30,24 +30,13 @@ const fakeItems: WorkItem[] =[
   },
 ];
 
-const fakeItem: WorkItem =
-  {
-    id: 10,
-    value: 5,
-    description: 'Test item',
-    timestamp: new Date()
-  };
-
-class StoreMock {
-  select =  jasmine.createSpy().and.returnValue(of({}));
-  dispatch = jasmine.createSpy();
-}
+const fakeItem: WorkItem = fakeItems[0];
 
 describe('ValueService', () => {
-  const helperServiceMock = jasmine.createSpyObj('item-helper-service', ['generateWorkItem'])
+  const helperServiceMock = jasmine.createSpyObj('item-helper-service', ['generateWorkItem']);
   helperServiceMock.generateWorkItem.and.returnValue(fakeItem);
 
-  const WorkItemSelectorsServiceMock = jasmine.createSpyObj('WorkItemSelectorsService', ['getAllItems$', 'getItem$'], [])
+  const WorkItemSelectorsServiceMock = jasmine.createSpyObj('WorkItemSelectorsService', ['getAllItems$', 'getItem$'], []);
   WorkItemSelectorsServiceMock.getAllItems$.and.returnValue(of(fakeItem));
   WorkItemSelectorsServiceMock.getItem$.and.returnValue(of(fakeItem));
 
@@ -58,7 +47,7 @@ describe('ValueService', () => {
       StoreModule.forRoot([], {
         runtimeChecks: {
           strictStateImmutability: true,
-          strictActionImmutability: true,
+          strictActionImmutability: true
         }
       })
     ],
@@ -86,7 +75,5 @@ describe('ValueService', () => {
   it('should get work item', () => {
     expect(service.getWorkItem(1)).toBe(fakeItem);
   });
-
-
 
 });

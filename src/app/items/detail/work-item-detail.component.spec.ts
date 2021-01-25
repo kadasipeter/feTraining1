@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { WorkItemService } from 'src/app/core/work-item.service';
 import { WorkItemDetailComponent as WorkItemDetailComponent } from './work-item-detail.component';
 
-const workItemServiceMock = jasmine.createSpyObj('WorkItemService', ['getWorkItem'])
+const workItemServiceMock = jasmine.createSpyObj('WorkItemService', ['getWorkItem']);
 workItemServiceMock.getWorkItem.and.returnValue(of());
 
 describe('ItemDetailComponent', () => {
@@ -15,7 +15,9 @@ describe('ItemDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkItemDetailComponent ],
+      declarations: [
+        WorkItemDetailComponent
+      ],
       providers: [
         { provide: WorkItemService, useValue: workItemServiceMock },
         { provide: ActivatedRoute, useValue: {
