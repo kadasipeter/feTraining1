@@ -47,3 +47,10 @@
   }
 }
 
+@mixin full-width-component() {
+  :host {
+    display: block;
+    width: 100%;
+  }
+}
+
